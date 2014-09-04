@@ -3,7 +3,7 @@
 
 #include "Socket.h"
 #include <iostream>
-#include <string>
+#include <string.h>
 #include <errno.h>
 #include <fcntl.h>
 
@@ -26,7 +26,7 @@ bool Socket::create() {
 
     // TIME_WAIT - argh
     int on = 1;
-    if (setsockopt(m_sock, SQL_SOCKET, SO_REUSEADDR, (const char *)&on, sizeof(on)) == -1) {
+    if (setsockopt(m_sock, SOL_SOCKET, SO_REUSEADDR, (const char *)&on, sizeof(on)) == -1) {
 	return false;
     }
 
@@ -42,7 +42,7 @@ bool Socket::bind(const int port) {
     m_addr.sin_addr.s_addr = INADDR_ANY;
     m_addr.sin_port = htons(port);
 
-    int bind_return + ::bind(m_sock, (struct sockaddr *)&m_addr, sizeof(m_addr));
+    int bind_return = ::bind(m_sock, (struct sockaddr *)&m_addr, sizeof(m_addr));
 
     if (bind_return == -1) {
 	return false;
@@ -119,6 +119,7 @@ bool Socket::connect(const std::string host, const int port) {
     } else {
 	return false;
     }
+}
 
 void Socket::set_non_blocking(const bool b) {
     int opts;
@@ -137,5 +138,5 @@ void Socket::set_non_blocking(const bool b) {
     }
 
     fcntl(m_sock,
- 	  F_SETFL, OPTS);
+ 	  F_SETFL, opts);
 }
