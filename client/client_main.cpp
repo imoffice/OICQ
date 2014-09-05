@@ -16,5 +16,14 @@ int main (void)
 
 	cout << connect << endl;
 
+
+
+	//bool send(const std::string s) const;
+	
+	string s("test 1");
+	bool send = client.send_fd(s);
+
+	cout << send << endl;
+
 	return 0;
 }

@@ -13,6 +13,7 @@ public:
 	
 	bool create();
 	bool connect_fd(string, unsigned int const);
+	bool send_fd(const string);
 
 private:
 	int sockfd;
