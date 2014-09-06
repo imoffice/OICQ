@@ -17,6 +17,7 @@ public:
     const ServerSocket& operator >> (std::string&) const;
 
     void accept(ServerSocket&);
+
 };
 
 #endif

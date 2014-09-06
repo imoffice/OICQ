@@ -13,15 +13,24 @@ int main(int argc, char **argv) {
     ServerSocket server(53000);
 
     while (true) {
-  	ServerSocket new_sock;
-	server.accept(new_sock);
+  	    ServerSocket new_sock;
+	    server.accept(new_sock);
 
-	while (true) {
-	    std::string data;
-	    new_sock >> data;
-	    new_sock << data;
-	}
-    }
+	    while (true) {
+	        std::string data;
+	        new_sock >> data;
+            
+            if (data == "quit") {
+                break;
+            } else {
+                cout << data << endl;
+            }
+
+	        new_sock << data;
+	    }
+
+        cout << "new socket" << endl;
+   }
 
     return 0;
 }
