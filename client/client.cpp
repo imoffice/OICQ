@@ -1,5 +1,4 @@
 #include "client.h"
-//#include "Socket.h"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -7,9 +6,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <netinet/in.h>
-
-#define HOST	"114.215.202.112"
-#define PORT	53000
+#include <iostream>
+#include <string>
+#include <errno.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -46,5 +46,14 @@ bool Client:: connect_fd(string host, unsigned int const port)
 		return false;
 }
 
+bool Client:: send_fd(const string s) {
+    int status = send(sockfd, s.c_str(), s.size(), MSG_DONTROUTE);
+
+    if (status == -1) {
+	return false;
+    } else {
+	return true;
+    }
+}
 
 
