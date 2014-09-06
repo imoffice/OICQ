@@ -1,5 +1,4 @@
 #include "client.h"
-//#include "Socket.h"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -11,9 +10,6 @@
 #include <string>
 #include <errno.h>
 #include <fcntl.h>
-
-#define HOST	"114.215.202.112"
-#define PORT	53000
 
 using namespace std;
 
